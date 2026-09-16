@@ -1,62 +1,47 @@
-# Paradise Nursery
+# ⚡ BÁO CÁO NGÀY 8 — XÂY DỰNG SILVER LAYER VỚI PYSPARK
 
-Paradise Nursery is a React + Redux single-page e-commerce application for an
-online houseplant shop. It includes a landing page, an "About Us" section, a
-product listing page organized by category, and a fully functional shopping
-cart built with Redux Toolkit.
+## 🛠️ Công việc đã thực hiện
 
-## Project Name
+Tiếp tục xử lý dữ liệu từ **Bronze layer** để xây dựng **Silver layer** cho dữ liệu QTTG BHXH bằng PySpark.
 
-**Paradise Nursery** — "Where Green Meets Serenity"
+* Viết job `silver_qttg.py` để xử lý dữ liệu Silver.
+* Đọc dữ liệu `RAW_QTTG_BHXH` và `RAW_QTTG_BHXH_DETAIL` từ Bronze.
+* Với bảng master, sử dụng `row_number()` để chọn bản ghi mới nhất của mỗi `SO_SO_BHXH`:
 
-## Features
+  * `partitionBy(SO_SO_BHXH)`
+  * `orderBy(CREATED_AT desc, ID desc)`
+  * Chỉ giữ bản ghi có `row_number = 1`.
+* Với bảng detail, chỉ giữ các bản ghi thuộc những `MASTER_ID` đã được chọn ở master Silver.
+* Chuẩn hóa dữ liệu `TU_THANG` và `DEN_THANG`.
+* Kiểm tra định dạng tháng theo `YYYYMM`.
+* Cast `MUC_LUONG` sang kiểu dữ liệu số khi cần thiết.
+* Kiểm tra và xử lý các record có dữ liệu tháng không hợp lệ hoặc không liên kết được với master.
 
-- **Landing page** with the company name, tagline, background image, and a
-  "Get Started" button that leads to the product listing.
-- **About Us** section with details about the company.
-- **Product listing page** showing houseplants grouped into categories
-  (Air Purifying Plants, Aromatic Plants, Succulents & Cacti), each with a
-  thumbnail, name, price, and an "Add to Cart" button.
-- **Navbar** with links to Home, Plants, and Cart, plus a live cart item
-  count.
-- **Shopping cart page** showing each item's thumbnail, name, unit price,
-  quantity controls, subtotal, a delete button, the total cart amount, a
-  "Continue Shopping" button, and a "Checkout" button (shows "Coming Soon").
-- **Redux Toolkit** cart slice managing add, increment, decrement, and
-  remove actions.
+## 📚 Kiến thức rút ra
 
-## Tech Stack
+Hiểu rõ hơn vai trò của **Silver layer** trong Data Lakehouse:
 
-- React (Vite)
-- Redux Toolkit + React-Redux
-- CSS
+* **Silver:** làm sạch, chuẩn hóa và xử lý các quy tắc nghiệp vụ trên dữ liệu từ Bronze.
+* Sử dụng **Window Function** với `row_number()` để xác định bản ghi master mới nhất theo từng `SO_SO_BHXH`.
+* Khi có cùng `CREATED_AT`, sử dụng `ID desc` làm điều kiện ưu tiên tiếp theo để xác định bản ghi mới nhất.
+* Detail phải được lọc theo các `MASTER_ID` hợp lệ của master Silver để đảm bảo quan hệ **master-detail** chính xác.
+* Kiểm tra định dạng `TU_THANG`, `DEN_THANG` giúp đảm bảo dữ liệu thời gian có thể sử dụng cho các bước phân tích tiếp theo.
+* Kiểm tra kiểu dữ liệu và các bản ghi lỗi giúp nâng cao chất lượng dữ liệu trước khi đưa sang Gold layer.
 
-## Getting Started
+## ✅ Kết quả
 
-```bash
-npm install
-npm run dev
-```
+Hoàn thành bước xử lý **Silver layer** cho dữ liệu QTTG BHXH:
 
-Then open the local URL shown in the terminal (typically
-`http://localhost:5173`).
+* Mỗi `SO_SO_BHXH` chỉ còn **1 bản ghi master mới nhất**.
+* Bản ghi mới nhất được xác định dựa trên `CREATED_AT desc, ID desc`.
+* Detail Silver chỉ chứa các bản ghi thuộc **master Silver**.
+* Dữ liệu `TU_THANG`, `DEN_THANG` được chuẩn hóa và kiểm tra theo format `YYYYMM`.
+* `MUC_LUONG` được chuyển sang kiểu số phù hợp.
+* Thực hiện kiểm tra các lỗi về định dạng tháng và liên kết `MASTER_ID`.
 
-## Project Structure
+Dữ liệu Silver sau khi xử lý được ghi tại:
 
-```
-src/
-├── App.jsx                 # Landing page + view routing
-├── App.css                 # Landing page styles (incl. background image)
-├── main.jsx                # App entry point, wraps App in Redux Provider
-├── components/
-│   ├── AboutUs.jsx         # Company details modal
-│   ├── ProductList.jsx     # Product listing page
-│   ├── ProductList.css
-│   ├── CartItem.jsx        # Shopping cart page
-│   └── CartItem.css
-├── redux/
-│   ├── CartSlice.jsx       # Redux slice for the shopping cart
-│   └── store.jsx           # Redux store configuration
-└── data/
-    └── plantsData.js       # Plant catalog data
-```
+* `output/spark_lake/silver/qttg_bhxh`
+* `output/spark_lake/silver/qttg_bhxh_detail`
+
+Qua đó hoàn thành bước **làm sạch và xử lý nghiệp vụ từ Bronze → Silver**, tạo dữ liệu đầu vào phù hợp cho bước tổng hợp tại **Gold layer**.
