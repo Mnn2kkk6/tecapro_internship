@@ -1,62 +1,39 @@
-# Paradise Nursery
+# ⚡ BÁO CÁO NGÀY 10 — HOÀN THIỆN PIPELINE VỚI AIRFLOW
 
-Paradise Nursery is a React + Redux single-page e-commerce application for an
-online houseplant shop. It includes a landing page, an "About Us" section, a
-product listing page organized by category, and a fully functional shopping
-cart built with Redux Toolkit.
+## 🛠️ Công việc đã thực hiện
 
-## Project Name
+Hoàn thiện luồng xử lý dữ liệu **QTTG BHXH** bằng cách kết hợp **PySpark và Airflow**.
 
-**Paradise Nursery** — "Where Green Meets Serenity"
+* Đọc và thực hiện theo tài liệu `HUONG_DAN_AIRFLOW_SPARK_LOCAL.md`.
+* Tạo DAG Airflow điều phối 4 job:
 
-## Features
+  * `bronze_qttg`
+  * `silver_qttg`
+  * `gold_qttg`
+  * `validate_qttg`
+* Thiết lập dependency theo thứ tự:
+  `Bronze → Silver → Gold → Validate`
+* Chạy thử pipeline trên **Airflow UI** và kiểm tra trạng thái các task.
+* Tổng hợp kết quả xử lý dữ liệu trong tuần.
 
-- **Landing page** with the company name, tagline, background image, and a
-  "Get Started" button that leads to the product listing.
-- **About Us** section with details about the company.
-- **Product listing page** showing houseplants grouped into categories
-  (Air Purifying Plants, Aromatic Plants, Succulents & Cacti), each with a
-  thumbnail, name, price, and an "Add to Cart" button.
-- **Navbar** with links to Home, Plants, and Cart, plus a live cart item
-  count.
-- **Shopping cart page** showing each item's thumbnail, name, unit price,
-  quantity controls, subtotal, a delete button, the total cart amount, a
-  "Continue Shopping" button, and a "Checkout" button (shows "Coming Soon").
-- **Redux Toolkit** cart slice managing add, increment, decrement, and
-  remove actions.
+## 📚 Kiến thức rút ra
 
-## Tech Stack
+Hiểu rõ hơn cách **Airflow** được sử dụng để điều phối một pipeline Data Engineering:
 
-- React (Vite)
-- Redux Toolkit + React-Redux
-- CSS
+* **Airflow:** quản lý thứ tự, dependency và trạng thái các job.
+* **PySpark:** thực hiện các bước ingest, transform và aggregation.
+* Pipeline có thể tổ chức theo luồng **Ingest → ETL → Result → Validate**.
+* Việc tách Bronze, Silver và Gold giúp quá trình xử lý dữ liệu rõ ràng và dễ kiểm tra.
 
-## Getting Started
+## ✅ Kết quả
 
-```bash
-npm install
-npm run dev
-```
+Hoàn thiện pipeline xử lý dữ liệu **QTTG BHXH** với khoảng **1.000.000 dòng detail**:
 
-Then open the local URL shown in the terminal (typically
-`http://localhost:5173`).
+* **Bronze:** ingest dữ liệu raw thành công.
+* **Silver:** làm sạch và xử lý nghiệp vụ thành công.
+* **Gold:** tạo báo cáo tổng hợp theo tháng.
+* **Validate:** kiểm tra kết quả sau xử lý.
+* Các output được lưu lần lượt tại `output/spark_lake/bronze`, `silver` và `gold`.
+* DAG Airflow điều phối thành công toàn bộ luồng **Bronze → Silver → Gold → Validate**.
 
-## Project Structure
-
-```
-src/
-├── App.jsx                 # Landing page + view routing
-├── App.css                 # Landing page styles (incl. background image)
-├── main.jsx                # App entry point, wraps App in Redux Provider
-├── components/
-│   ├── AboutUs.jsx         # Company details modal
-│   ├── ProductList.jsx     # Product listing page
-│   ├── ProductList.css
-│   ├── CartItem.jsx        # Shopping cart page
-│   └── CartItem.css
-├── redux/
-│   ├── CartSlice.jsx       # Redux slice for the shopping cart
-│   └── store.jsx           # Redux store configuration
-└── data/
-    └── plantsData.js       # Plant catalog data
-```
+Qua đó hoàn thiện flow **Ingest → ETL → Result**, đồng thời cập nhật README hướng dẫn cách chạy và kiểm tra kết quả của pipeline.
