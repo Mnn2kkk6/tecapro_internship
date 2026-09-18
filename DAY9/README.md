@@ -1,62 +1,42 @@
-# Paradise Nursery
+# ⚡ BÁO CÁO NGÀY 9 — XÂY DỰNG GOLD LAYER VỚI PYSPARK
 
-Paradise Nursery is a React + Redux single-page e-commerce application for an
-online houseplant shop. It includes a landing page, an "About Us" section, a
-product listing page organized by category, and a fully functional shopping
-cart built with Redux Toolkit.
+## 🛠️ Công việc đã thực hiện
 
-## Project Name
+Tiếp tục xử lý dữ liệu từ **Silver layer** để xây dựng **Gold layer** cho dữ liệu QTTG BHXH bằng PySpark.
 
-**Paradise Nursery** — "Where Green Meets Serenity"
+* Viết job `gold_qttg.py` để xử lý dữ liệu Gold.
+* Tạo `DIM_THANG` làm danh sách các tháng báo cáo.
+* Đọc dữ liệu master và detail từ Silver.
+* Join dữ liệu tháng với khoảng thời gian tham gia BHXH `TU_THANG → DEN_THANG`.
+* Tổng hợp dữ liệu theo từng tháng báo cáo.
+* Tính các chỉ tiêu:
 
-## Features
+  * `SO_NGUOI_THAM_GIA`
+  * `SO_DON_VI`
+  * `TONG_QUY_LUONG`
+  * `LUONG_BINH_QUAN`
+  * `SO_NGUOI_LUONG_0`
+* Ghi kết quả Gold ra `output/spark_lake/gold/bao_cao_bhxh_thang`.
+* Kiểm tra số liệu sau khi xử lý với dữ liệu Silver.
 
-- **Landing page** with the company name, tagline, background image, and a
-  "Get Started" button that leads to the product listing.
-- **About Us** section with details about the company.
-- **Product listing page** showing houseplants grouped into categories
-  (Air Purifying Plants, Aromatic Plants, Succulents & Cacti), each with a
-  thumbnail, name, price, and an "Add to Cart" button.
-- **Navbar** with links to Home, Plants, and Cart, plus a live cart item
-  count.
-- **Shopping cart page** showing each item's thumbnail, name, unit price,
-  quantity controls, subtotal, a delete button, the total cart amount, a
-  "Continue Shopping" button, and a "Checkout" button (shows "Coming Soon").
-- **Redux Toolkit** cart slice managing add, increment, decrement, and
-  remove actions.
+## 📚 Kiến thức rút ra
 
-## Tech Stack
+Hiểu rõ hơn vai trò của **Gold layer** trong Data Lakehouse:
 
-- React (Vite)
-- Redux Toolkit + React-Redux
-- CSS
+* **Gold:** chứa dữ liệu đã được tổng hợp theo nghiệp vụ, phục vụ báo cáo và phân tích.
+* `DIM_THANG` giúp xác định tập các tháng cần lập báo cáo.
+* Sử dụng điều kiện khoảng `TU_THANG → DEN_THANG` để xác định người lao động tham gia BHXH trong từng tháng.
+* Có thể sử dụng các hàm tổng hợp để tính số người, số đơn vị và các chỉ tiêu về tiền lương.
+* Gold sử dụng dữ liệu đã được làm sạch và chuẩn hóa từ Silver thay vì xử lý trực tiếp dữ liệu raw.
 
-## Getting Started
+## ✅ Kết quả
 
-```bash
-npm install
-npm run dev
-```
+Hoàn thành bước xây dựng **Gold layer** cho dữ liệu QTTG BHXH:
 
-Then open the local URL shown in the terminal (typically
-`http://localhost:5173`).
+* Tạo được báo cáo tổng hợp theo từng tháng.
+* Tính được các chỉ tiêu `SO_NGUOI_THAM_GIA`, `SO_DON_VI`, `TONG_QUY_LUONG`, `LUONG_BINH_QUAN` và `SO_NGUOI_LUONG_0`.
+* Xử lý được dữ liệu detail quy mô **1.000.000 dòng**.
+* Dữ liệu Gold được ghi tại `output/spark_lake/gold/bao_cao_bhxh_thang`.
+* Thực hiện kiểm tra và đối chiếu số liệu sau khi chạy.
 
-## Project Structure
-
-```
-src/
-├── App.jsx                 # Landing page + view routing
-├── App.css                 # Landing page styles (incl. background image)
-├── main.jsx                # App entry point, wraps App in Redux Provider
-├── components/
-│   ├── AboutUs.jsx         # Company details modal
-│   ├── ProductList.jsx     # Product listing page
-│   ├── ProductList.css
-│   ├── CartItem.jsx        # Shopping cart page
-│   └── CartItem.css
-├── redux/
-│   ├── CartSlice.jsx       # Redux slice for the shopping cart
-│   └── store.jsx           # Redux store configuration
-└── data/
-    └── plantsData.js       # Plant catalog data
-```
+Qua đó hoàn thành luồng xử lý **Bronze → Silver → Gold**, trong đó Gold cung cấp dữ liệu tổng hợp phục vụ báo cáo QTTG BHXH theo tháng.
