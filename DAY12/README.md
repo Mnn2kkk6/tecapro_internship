@@ -1,53 +1,60 @@
-# ⚡ BÁO CÁO NGÀY 12 — JOIN, DEDUPLICATE VÀ WINDOW TRONG PYSPARK
+# ⚡ BÁO CÁO NGÀY 12 — JOIN VÀ XỬ LÝ DỮ LIỆU GIAO DỊCH TRONG PYSPARK
 
 ## 🛠️ Công việc đã thực hiện
 
-Thực hành xử lý dữ liệu giao dịch bằng PySpark với 2 file `customers.csv` và `transactions.csv`.
+### Bài 1 — Join và xử lý dữ liệu không mapping
 
-* Khai báo **schema thủ công** cho dữ liệu, không sử dụng `inferSchema`.
-* Kiểm tra và tách các record lỗi:
+Thực hành các kỹ thuật **Join trong PySpark** với hai dataset `orders` và `customers`.
+
+* Tạo dữ liệu `orders` và `customers`.
+* Thực hiện **Inner Join** và **Left Join**.
+* Tạo trường hợp order không tìm thấy customer tương ứng.
+* Tách dữ liệu thành hai nhóm **mapped** và **unmapped**.
+* So sánh kết quả giữa `inner join` và `left join`.
+* Kiểm tra dữ liệu không mapping để phục vụ việc kiểm tra chất lượng dữ liệu.
+
+### Bài 2 — Xử lý transaction end-to-end
+
+Thực hành flow xử lý dữ liệu thực tế với `customers.csv` và `transactions.csv`.
+
+* Khai báo schema thủ công, không sử dụng `inferSchema`.
+* Validate dữ liệu và tách record lỗi:
 
   * Thiếu `customer_id`.
   * `amount <= 0`.
-* Xử lý các `transaction_id` bị trùng bằng **Window Function**, chỉ giữ bản ghi có `updated_at` mới nhất.
-* Thực hiện **left join** giữa `transactions` và `customers`.
-* Tách các transaction không mapping được với customer thành một DataFrame riêng.
-* Sử dụng **Window Function** để tìm transaction gần nhất của từng customer.
-* Tính các chỉ số theo customer:
-
-  * Tổng số transaction.
-  * Tổng `amount`.
-  * Số transaction có `status = SUCCESS`.
-* Tìm **top 3 customer có tổng amount cao nhất theo từng province**.
-* Ghi dữ liệu hợp lệ ra **Parquet**, partition theo `province`.
-* Ghi dữ liệu lỗi và dữ liệu không mapping được ra output riêng.
-* Đọc lại dữ liệu sau khi ghi và kiểm tra count để validate kết quả.
-* Sử dụng `explain()` để quan sát execution plan, xác định các bước có **join, shuffle và sort**.
+* Xử lý duplicate `transaction_id` bằng **Window Function**, giữ record có `updated_at` mới nhất.
+* Join transactions với customers bằng **Left Join**.
+* Tách các transaction không mapping được customer.
+* Dùng Window Function để tìm transaction gần nhất của từng customer.
+* Tính tổng số transaction, tổng amount và số transaction `SUCCESS` theo customer.
+* Tìm top 3 customer có tổng amount cao nhất theo từng province.
+* Ghi dữ liệu hợp lệ ra Parquet và partition theo `province`.
+* Ghi dữ liệu lỗi và unmapped ra output riêng.
+* Đọc lại output và kiểm tra count sau khi ghi.
+* Sử dụng `explain()` để quan sát execution plan và các bước có `join`, `shuffle`, `sort`.
 
 ## 📚 Kiến thức rút ra
 
-Hiểu rõ hơn về flow xử lý dữ liệu thực tế trong PySpark:
-
-* **Window Function** phù hợp để xử lý duplicate có điều kiện, ví dụ giữ record mới nhất theo `updated_at`.
-* `dropDuplicates()` chỉ loại bỏ duplicate theo các cột được chỉ định, không phù hợp khi cần xác định bản ghi nào được ưu tiên giữ lại.
-* **Left Join** giúp giữ toàn bộ transaction, kể cả những record không tìm thấy customer tương ứng, từ đó có thể tách và kiểm tra dữ liệu unmapped.
-* Có thể sử dụng Window để xác định **transaction gần nhất của mỗi customer** dựa trên `transaction_time`.
-* `groupBy` kết hợp với aggregation để tính các chỉ số tổng hợp theo customer.
-* Partition theo `province` giúp tổ chức dữ liệu output theo khu vực và hỗ trợ truy vấn theo partition.
-* `explain()` giúp quan sát cách Spark thực thi query và phát hiện các bước có khả năng gây **shuffle, sort hoặc join**.
-* Khi dữ liệu tăng lên vài triệu record, các bước như **join, window và aggregation** có thể tạo nhiều shuffle và tiêu tốn tài nguyên.
-
-## ✅ Kết quả
-
-Hoàn thành bài thực hành xử lý transaction end-to-end:
+* Hiểu sự khác nhau giữa **Inner Join** và **Left Join** trong ETL.
+* Hiểu vai trò của việc giữ lại dữ liệu **unmapped** để kiểm tra chất lượng dữ liệu.
+* Biết sử dụng **Window Function** để xử lý duplicate theo điều kiện thay vì chỉ dùng `dropDuplicates()`.
+* Hiểu cách sử dụng Window để tìm bản ghi mới nhất hoặc transaction gần nhất.
+* Biết kết hợp `groupBy` và aggregation để tạo các chỉ số theo customer.
+* Hiểu cách partition dữ liệu Parquet theo `province`.
+* Biết sử dụng `explain()` để quan sát execution plan.
+* Nhận biết các bước **join, window, aggregation** có thể tạo shuffle và tiêu tốn tài nguyên khi dữ liệu tăng lên.
+* Hiểu rõ hơn flow xử lý dữ liệu:
 
 `Raw Data → Validate → Deduplicate → Join → Window → Aggregate → Partitioned Output`
 
-* Dữ liệu lỗi được tách riêng.
-* Duplicate transaction được xử lý theo `updated_at` mới nhất.
-* Transaction không mapping customer được giữ lại để kiểm tra.
-* Hoàn thành các phép tính tổng hợp theo customer.
-* Xác định được top 3 customer theo từng province.
-* Dữ liệu hợp lệ được lưu dạng Parquet và partition theo `province`.
-* Đọc lại output và kiểm tra count thành công.
-* Hiểu rõ hơn cách Spark sử dụng **join, shuffle và sort** trong execution plan.
+## ✅ Kết quả
+
+Hoàn thành cả hai bài thực hành về **Join và xử lý dữ liệu bằng PySpark**.
+
+* Thực hiện được Inner Join, Left Join và xử lý dữ liệu unmapped.
+* Hoàn thành pipeline transaction từ validate đến output Parquet.
+* Xử lý được duplicate transaction và dữ liệu lỗi.
+* Hoàn thành các phép tính tổng hợp theo customer và province.
+* Kiểm tra được execution plan bằng `explain()`.
+* Đọc lại output và kiểm tra count sau khi ghi.
+* Củng cố quy trình xử lý dữ liệu thực tế bằng PySpark từ **raw data đến dữ liệu đã được làm sạch và tổng hợp**.
