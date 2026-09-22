@@ -1,62 +1,24 @@
-# Paradise Nursery
+# ⚡ BÁO CÁO NGÀY 12 — JOIN TRONG PYSPARK
 
-Paradise Nursery is a React + Redux single-page e-commerce application for an
-online houseplant shop. It includes a landing page, an "About Us" section, a
-product listing page organized by category, and a fully functional shopping
-cart built with Redux Toolkit.
+## 🛠️ Công việc đã thực hiện
 
-## Project Name
+Thực hành các kỹ thuật **Join trong PySpark** và xử lý dữ liệu không mapping được.
 
-**Paradise Nursery** — "Where Green Meets Serenity"
+* Tạo 2 dataset `orders` và `customers`.
+* Thực hành `inner join` và `left join`.
+* Tạo trường hợp `order` không tìm thấy `customer` tương ứng.
+* Tách các record thành 2 nhóm **mapped** và **unmapped**.
+* So sánh kết quả giữa `inner join` và `left join`.
 
-## Features
+## 📚 Kiến thức rút ra
 
-- **Landing page** with the company name, tagline, background image, and a
-  "Get Started" button that leads to the product listing.
-- **About Us** section with details about the company.
-- **Product listing page** showing houseplants grouped into categories
-  (Air Purifying Plants, Aromatic Plants, Succulents & Cacti), each with a
-  thumbnail, name, price, and an "Add to Cart" button.
-- **Navbar** with links to Home, Plants, and Cart, plus a live cart item
-  count.
-- **Shopping cart page** showing each item's thumbnail, name, unit price,
-  quantity controls, subtotal, a delete button, the total cart amount, a
-  "Continue Shopping" button, and a "Checkout" button (shows "Coming Soon").
-- **Redux Toolkit** cart slice managing add, increment, decrement, and
-  remove actions.
+Hiểu rõ hơn cách sử dụng **Join trong ETL**:
 
-## Tech Stack
+* `Inner Join` chỉ giữ các record có dữ liệu mapping ở cả hai bảng.
+* `Left Join` giữ lại toàn bộ dữ liệu từ bảng bên trái, kể cả khi không tìm thấy bản ghi tương ứng.
+* Các record **unmapped** cần được giữ lại để kiểm tra và xử lý dữ liệu nguồn.
+* Việc kiểm soát dữ liệu không mapping giúp phát hiện các vấn đề về khóa liên kết và chất lượng dữ liệu trong quá trình ETL.
 
-- React (Vite)
-- Redux Toolkit + React-Redux
-- CSS
+## ✅ Kết quả
 
-## Getting Started
-
-```bash
-npm install
-npm run dev
-```
-
-Then open the local URL shown in the terminal (typically
-`http://localhost:5173`).
-
-## Project Structure
-
-```
-src/
-├── App.jsx                 # Landing page + view routing
-├── App.css                 # Landing page styles (incl. background image)
-├── main.jsx                # App entry point, wraps App in Redux Provider
-├── components/
-│   ├── AboutUs.jsx         # Company details modal
-│   ├── ProductList.jsx     # Product listing page
-│   ├── ProductList.css
-│   ├── CartItem.jsx        # Shopping cart page
-│   └── CartItem.css
-├── redux/
-│   ├── CartSlice.jsx       # Redux slice for the shopping cart
-│   └── store.jsx           # Redux store configuration
-└── data/
-    └── plantsData.js       # Plant catalog data
-```
+Hoàn thành bài thực hành **Join trong PySpark**, thực hiện được `inner join`, `left join`, phân loại mapped/unmapped và hiểu vai trò của việc giữ lại dữ liệu không mapping trong quy trình ETL.
