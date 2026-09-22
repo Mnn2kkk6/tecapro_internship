@@ -1,62 +1,28 @@
-# Paradise Nursery
+# ⚡ BÁO CÁO NGÀY 11 — DATA TYPES TRONG PYSPARK
 
-Paradise Nursery is a React + Redux single-page e-commerce application for an
-online houseplant shop. It includes a landing page, an "About Us" section, a
-product listing page organized by category, and a fully functional shopping
-cart built with Redux Toolkit.
+## 🛠️ Công việc đã thực hiện
 
-## Project Name
+Thực hành các **Data Types trong PySpark** và cách kiểm soát schema trong quá trình xử lý dữ liệu.
 
-**Paradise Nursery** — "Where Green Meets Serenity"
+* Tìm hiểu các kiểu dữ liệu cơ bản trong PySpark.
+* Thực hành `Double`, `Float`, `Decimal` và các kiểu dữ liệu phức tạp như `Array`, `Struct`.
+* Tạo dataset gồm `String`, `Integer`, `Decimal`, `Date`, `Timestamp`, `Array` và `Struct`.
+* Khai báo **schema thủ công** thay vì sử dụng `inferSchema`.
+* Thực hiện cast `amount` và `date` từ `String` sang datatype phù hợp.
+* Tạo dữ liệu sai định dạng để kiểm tra kết quả khi cast.
+* Tìm hiểu cách xử lý dữ liệu **semi-structured** trong PySpark.
 
-## Features
+## 📚 Kiến thức rút ra
 
-- **Landing page** with the company name, tagline, background image, and a
-  "Get Started" button that leads to the product listing.
-- **About Us** section with details about the company.
-- **Product listing page** showing houseplants grouped into categories
-  (Air Purifying Plants, Aromatic Plants, Succulents & Cacti), each with a
-  thumbnail, name, price, and an "Add to Cart" button.
-- **Navbar** with links to Home, Plants, and Cart, plus a live cart item
-  count.
-- **Shopping cart page** showing each item's thumbnail, name, unit price,
-  quantity controls, subtotal, a delete button, the total cart amount, a
-  "Continue Shopping" button, and a "Checkout" button (shows "Coming Soon").
-- **Redux Toolkit** cart slice managing add, increment, decrement, and
-  remove actions.
+Hiểu rõ hơn về **datatype và schema trong PySpark**:
 
-## Tech Stack
+* Mỗi kiểu dữ liệu có cách lưu trữ và xử lý khác nhau.
+* `Decimal` phù hợp với các dữ liệu cần độ chính xác cao như tiền tệ.
+* `Array` và `Struct` giúp xử lý dữ liệu có cấu trúc phức tạp.
+* Khai báo schema thủ công giúp kiểm soát dữ liệu tốt hơn so với `inferSchema`.
+* Khi cast dữ liệu sai định dạng, giá trị có thể trở thành `null`, vì vậy cần kiểm tra dữ liệu sau khi chuyển kiểu.
+* Kiểm soát datatype là bước quan trọng trong ETL để đảm bảo dữ liệu đầu vào đúng và ổn định.
 
-- React (Vite)
-- Redux Toolkit + React-Redux
-- CSS
+## ✅ Kết quả
 
-## Getting Started
-
-```bash
-npm install
-npm run dev
-```
-
-Then open the local URL shown in the terminal (typically
-`http://localhost:5173`).
-
-## Project Structure
-
-```
-src/
-├── App.jsx                 # Landing page + view routing
-├── App.css                 # Landing page styles (incl. background image)
-├── main.jsx                # App entry point, wraps App in Redux Provider
-├── components/
-│   ├── AboutUs.jsx         # Company details modal
-│   ├── ProductList.jsx     # Product listing page
-│   ├── ProductList.css
-│   ├── CartItem.jsx        # Shopping cart page
-│   └── CartItem.css
-├── redux/
-│   ├── CartSlice.jsx       # Redux slice for the shopping cart
-│   └── store.jsx           # Redux store configuration
-└── data/
-    └── plantsData.js       # Plant catalog data
-```
+Hoàn thành bài thực hành **Data Types trong PySpark**, thực hiện được việc khai báo schema, cast dữ liệu và kiểm tra các trường hợp dữ liệu không hợp lệ, qua đó hiểu rõ hơn vai trò của **schema và datatype trong quy trình ETL**.
