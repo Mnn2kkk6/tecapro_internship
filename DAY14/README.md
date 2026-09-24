@@ -1,62 +1,66 @@
-# Paradise Nursery
+# ⚡ BÁO CÁO NGÀY 13 — UDF, PANDAS UDF VÀ UDTF TRONG PYSPARK
 
-Paradise Nursery is a React + Redux single-page e-commerce application for an
-online houseplant shop. It includes a landing page, an "About Us" section, a
-product listing page organized by category, and a fully functional shopping
-cart built with Redux Toolkit.
+## 🛠️ Công việc đã thực hiện
 
-## Project Name
+### Bài 1 — Python UDF
 
-**Paradise Nursery** — "Where Green Meets Serenity"
+Thực hành sử dụng **Python UDF** để xử lý dữ liệu khách hàng.
 
-## Features
+* Đọc dữ liệu `customers.csv` bằng PySpark.
+* Viết UDF để chuẩn hóa `customer_name` bằng cách loại bỏ khoảng trắng và chuyển sang chữ hoa.
+* Viết UDF để phân loại khách hàng theo `amount` thành:
 
-- **Landing page** with the company name, tagline, background image, and a
-  "Get Started" button that leads to the product listing.
-- **About Us** section with details about the company.
-- **Product listing page** showing houseplants grouped into categories
-  (Air Purifying Plants, Aromatic Plants, Succulents & Cacti), each with a
-  thumbnail, name, price, and an "Add to Cart" button.
-- **Navbar** with links to Home, Plants, and Cart, plus a live cart item
-  count.
-- **Shopping cart page** showing each item's thumbnail, name, unit price,
-  quantity controls, subtotal, a delete button, the total cart amount, a
-  "Continue Shopping" button, and a "Checkout" button (shows "Coming Soon").
-- **Redux Toolkit** cart slice managing add, increment, decrement, and
-  remove actions.
+  * `VIP`
+  * `STANDARD`
+  * `BASIC`
+* Tạo thêm các cột `customer_name_clean` và `customer_segment`.
 
-## Tech Stack
+### Bài 2 — So sánh với Built-in Spark Function
 
-- React (Vite)
-- Redux Toolkit + React-Redux
-- CSS
+Viết lại các xử lý trên bằng các hàm có sẵn của Spark.
 
-## Getting Started
+* Sử dụng `trim()` và `upper()` để xử lý tên khách hàng.
+* Sử dụng `when()` và `otherwise()` để phân loại khách hàng.
+* So sánh cách viết bằng UDF và built-in function.
+* Tìm hiểu trường hợp nên ưu tiên built-in function để tận dụng khả năng tối ưu của Spark.
 
-```bash
-npm install
-npm run dev
-```
+### Bài 3 — Pandas UDF
 
-Then open the local URL shown in the terminal (typically
-`http://localhost:5173`).
+Thực hành **Pandas UDF** để xử lý dữ liệu dạng batch/vector.
 
-## Project Structure
+* Xử lý cột `amount` bằng một công thức tính toán.
+* So sánh cách viết Pandas UDF với Python UDF.
+* Tìm hiểu cách Pandas UDF xử lý dữ liệu theo vector và trường hợp phù hợp để sử dụng.
 
-```
-src/
-├── App.jsx                 # Landing page + view routing
-├── App.css                 # Landing page styles (incl. background image)
-├── main.jsx                # App entry point, wraps App in Redux Provider
-├── components/
-│   ├── AboutUs.jsx         # Company details modal
-│   ├── ProductList.jsx     # Product listing page
-│   ├── ProductList.css
-│   ├── CartItem.jsx        # Shopping cart page
-│   └── CartItem.css
-├── redux/
-│   ├── CartSlice.jsx       # Redux slice for the shopping cart
-│   └── store.jsx           # Redux store configuration
-└── data/
-    └── plantsData.js       # Plant catalog data
-```
+### Bài 4 — UDTF
+
+Thực hành **UDTF** với dữ liệu `tags`.
+
+* Tạo DataFrame có cột `tags` dạng chuỗi như `spark,python,etl`.
+* Tách một record thành nhiều record theo từng tag.
+* Tạo output `customer_tags` với các cột `customer_id` và `tags`.
+* Tìm hiểu sự khác nhau giữa UDF và UDTF:
+
+  * UDF thường trả về một giá trị cho mỗi input row.
+  * UDTF có thể tạo ra nhiều row từ một input row.
+
+## 📚 Kiến thức rút ra
+
+* Hiểu **UDF** là cách tự định nghĩa hàm để xử lý dữ liệu trong Spark khi các hàm có sẵn không đáp ứng được yêu cầu.
+* Hiểu **UDTF** dùng để biến một input row thành nhiều output row.
+* Biết khi nào nên sử dụng **built-in Spark function** thay vì UDF.
+* Built-in function thường nên được ưu tiên khi có thể sử dụng vì Spark có thể tối ưu execution tốt hơn.
+* Hiểu sự khác nhau giữa **Python UDF** và **Pandas UDF** trong cách xử lý dữ liệu.
+* Pandas UDF phù hợp với một số trường hợp cần xử lý dữ liệu theo batch/vector.
+* Hiểu việc sử dụng UDF không nên quá lạm dụng khi cùng một logic đã có sẵn trong Spark.
+
+## ✅ Kết quả
+
+Hoàn thành bài thực hành về **UDF, Pandas UDF và UDTF trong PySpark**.
+
+* Xử lý và chuẩn hóa dữ liệu khách hàng bằng Python UDF.
+* Viết lại logic bằng built-in Spark functions để so sánh.
+* Thực hành Pandas UDF trên dữ liệu số.
+* Tách dữ liệu `tags` bằng UDTF và tạo output `customer_tags`.
+* Hoàn thành hai output `customers_processed` và `customer_tags`.
+* Hiểu rõ hơn cách lựa chọn giữa **built-in function, UDF, Pandas UDF và UDTF** trong quá trình xử lý dữ liệu bằng PySpark.
