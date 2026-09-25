@@ -1,59 +1,62 @@
-# ⚡ BÁO CÁO NGÀY 14 — UDF, PANDAS UDF VÀ UDTF TRONG PYSPARK
+# Paradise Nursery
 
-## 🔗 Link GitHub
+Paradise Nursery is a React + Redux single-page e-commerce application for an
+online houseplant shop. It includes a landing page, an "About Us" section, a
+product listing page organized by category, and a fully functional shopping
+cart built with Redux Toolkit.
 
-https://github.com/Mnn2kkk6/pyspark-udf-practice
+## Project Name
 
-## 🛠️ Công việc đã thực hiện
+**Paradise Nursery** — "Where Green Meets Serenity"
 
-### Bài 1 — Python UDF
+## Features
 
-Tìm hiểu cách sử dụng **Python UDF** để xử lý dữ liệu khách hàng.
+- **Landing page** with the company name, tagline, background image, and a
+  "Get Started" button that leads to the product listing.
+- **About Us** section with details about the company.
+- **Product listing page** showing houseplants grouped into categories
+  (Air Purifying Plants, Aromatic Plants, Succulents & Cacti), each with a
+  thumbnail, name, price, and an "Add to Cart" button.
+- **Navbar** with links to Home, Plants, and Cart, plus a live cart item
+  count.
+- **Shopping cart page** showing each item's thumbnail, name, unit price,
+  quantity controls, subtotal, a delete button, the total cart amount, a
+  "Continue Shopping" button, and a "Checkout" button (shows "Coming Soon").
+- **Redux Toolkit** cart slice managing add, increment, decrement, and
+  remove actions.
 
-* Đọc dữ liệu `customers.csv` bằng PySpark.
-* Chuẩn hóa `customer_name` bằng cách loại bỏ khoảng trắng và chuyển sang chữ hoa.
-* Phân loại khách hàng theo `amount` thành `VIP`, `STANDARD` và `BASIC`.
-* Tạo các cột `customer_name_clean` và `customer_segment`.
+## Tech Stack
 
-### Bài 2 — So sánh với Built-in Spark Function
+- React (Vite)
+- Redux Toolkit + React-Redux
+- CSS
 
-Đối chiếu cách xử lý bằng UDF với các hàm có sẵn của Spark.
+## Getting Started
 
-* Sử dụng `trim()` và `upper()` để chuẩn hóa tên.
-* Sử dụng `when()` và `otherwise()` để phân loại khách hàng.
-* So sánh độ dễ đọc và khả năng tối ưu giữa UDF và built-in functions.
-* Tìm hiểu lý do nên ưu tiên built-in function khi đã có hàm phù hợp.
+```bash
+npm install
+npm run dev
+```
 
-### Bài 3 — Pandas UDF
+Then open the local URL shown in the terminal (typically
+`http://localhost:5173`).
 
-Tìm hiểu **Pandas UDF** và cách xử lý dữ liệu theo dạng batch/vector.
+## Project Structure
 
-* Áp dụng công thức xử lý trên cột `amount`.
-* So sánh Python UDF và Pandas UDF.
-* Tìm hiểu trường hợp Pandas UDF phù hợp hơn khi xử lý dữ liệu dạng vector.
-
-### Bài 4 — UDTF
-
-Tìm hiểu **UDTF** thông qua bài toán tách dữ liệu `tags`.
-
-* Tạo DataFrame với cột `tags`, ví dụ `spark,python,etl`.
-* Tách một record thành nhiều record tương ứng với từng tag.
-* Tạo output `customer_tags` gồm `customer_id` và `tags`.
-* Phân biệt cách hoạt động của UDF và UDTF.
-
-## 📚 Kiến thức rút ra
-
-* **UDF** cho phép tự định nghĩa logic xử lý dữ liệu trong Spark.
-* **UDTF** có thể chuyển một input row thành nhiều output row.
-* **Pandas UDF** hỗ trợ xử lý dữ liệu theo batch/vector.
-* **Built-in Spark functions** nên được ưu tiên khi đã có sẵn logic tương ứng vì Spark có thể tối ưu quá trình thực thi tốt hơn.
-* Việc lựa chọn giữa UDF, Pandas UDF, UDTF và built-in function cần dựa trên yêu cầu xử lý và hiệu năng.
-
-## ✅ Kết quả
-
-* Xử lý dữ liệu khách hàng bằng Python UDF.
-* Đối chiếu với built-in Spark functions.
-* Áp dụng Pandas UDF cho dữ liệu số.
-* Sử dụng UDTF để tách dữ liệu `tags`.
-* Tạo hai output `customers_processed` và `customer_tags`.
-* Nắm được cách lựa chọn phương pháp phù hợp khi xử lý dữ liệu bằng PySpark.
+```
+src/
+├── App.jsx                 # Landing page + view routing
+├── App.css                 # Landing page styles (incl. background image)
+├── main.jsx                # App entry point, wraps App in Redux Provider
+├── components/
+│   ├── AboutUs.jsx         # Company details modal
+│   ├── ProductList.jsx     # Product listing page
+│   ├── ProductList.css
+│   ├── CartItem.jsx        # Shopping cart page
+│   └── CartItem.css
+├── redux/
+│   ├── CartSlice.jsx       # Redux slice for the shopping cart
+│   └── store.jsx           # Redux store configuration
+└── data/
+    └── plantsData.js       # Plant catalog data
+```
