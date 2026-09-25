@@ -1,5 +1,9 @@
 # ⚡ BÁO CÁO NGÀY 11 — DATA TYPES TRONG PYSPARK
 
+## 🔗 Link GitHub
+
+https://github.com/Mnn2kkk6/data_types-join
+
 ## 🛠️ Công việc đã thực hiện
 
 Thực hành các **Data Types trong PySpark** và cách kiểm soát schema trong quá trình xử lý dữ liệu.
