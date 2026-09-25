@@ -1,5 +1,9 @@
 # ⚡ BÁO CÁO NGÀY 10 — HOÀN THIỆN PIPELINE VỚI AIRFLOW
 
+## 🔗 Link GitHub
+
+https://github.com/Mnn2kkk6/pyspark-orders-repo
+
 ## 🛠️ Công việc đã thực hiện
 
 Hoàn thiện luồng xử lý dữ liệu **QTTG BHXH** bằng cách kết hợp **PySpark và Airflow**.
@@ -11,8 +15,7 @@ Hoàn thiện luồng xử lý dữ liệu **QTTG BHXH** bằng cách kết hợ
   * `silver_qttg`
   * `gold_qttg`
   * `validate_qttg`
-* Thiết lập dependency theo thứ tự:
-  `Bronze → Silver → Gold → Validate`
+* Thiết lập dependency theo thứ tự: `Bronze → Silver → Gold → Validate`.
 * Chạy thử pipeline trên **Airflow UI** và kiểm tra trạng thái các task.
 * Tổng hợp kết quả xử lý dữ liệu trong tuần.
 
