@@ -1,5 +1,9 @@
 # ⚡ BÁO CÁO NGÀY 7 — XÂY DỰNG BRONZE LAYER VỚI PYSPARK
 
+## 🔗 Link GitHub
+
+https://github.com/Mnn2kkk6/pyspark-orders-repo
+
 ## 🛠️ Công việc đã thực hiện
 
 Dựa trên phần đọc hiểu dữ liệu và nghiệp vụ của ngày 6, tiến hành xây dựng **Bronze layer** cho dữ liệu QTTG BHXH bằng PySpark.
