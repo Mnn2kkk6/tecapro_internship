@@ -1,5 +1,9 @@
 # ⚡ BÁO CÁO NGÀY 13 — PARTITIONING VÀ PERFORMANCE TRONG PYSPARK
 
+## 🔗 Link GitHub
+
+https://github.com/Mnn2kkk6/spark-transactions-pipeline
+
 ## 🛠️ Công việc đã thực hiện
 
 ### Bài thực hành — Partitioning và Performance
@@ -39,5 +43,4 @@ Hoàn thành bài thực hành **Partitioning và Performance trong PySpark**.
 * So sánh được `repartition` và `coalesce`.
 * Thực hành partition theo column và `partitionBy` khi ghi Parquet.
 * Quan sát được sự khác nhau về số file và cấu trúc output.
-* Hiểu được ảnh hưởng của partition, shuffle và small files đến hiệu năng xử lý dữ liệu.
-
+* Hiểu được ảnh hưởng của partition, shuffle và small files đến hiệu năng xử lý.
