@@ -1,5 +1,9 @@
 # ⚡ BÁO CÁO NGÀY 9 — XÂY DỰNG GOLD LAYER VỚI PYSPARK
 
+## 🔗 Link GitHub
+
+https://github.com/Mnn2kkk6/pyspark-orders-repo
+
 ## 🛠️ Công việc đã thực hiện
 
 Tiếp tục xử lý dữ liệu từ **Silver layer** để xây dựng **Gold layer** cho dữ liệu QTTG BHXH bằng PySpark.
