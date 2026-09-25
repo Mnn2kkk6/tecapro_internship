@@ -1,10 +1,6 @@
 # ⚡ BÁO CÁO NGÀY 6 — ĐỌC HIỂU DỮ LIỆU VÀ NGHIỆP VỤ QTTG BHXH
 
-[svg](https://github.com/Mnn2kkk6/tecapro_internship/tree/main/DAY6#-b%C3%A1o-c%C3%A1o-ng%C3%A0y-6--%C4%91%E1%BB%8Dc-hi%E1%BB%83u-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0-nghi%E1%BB%87p-v%E1%BB%A5-qttg-bhxh)
-
 ## 🛠️ Công việc đã thực hiện
-
-[svg](https://github.com/Mnn2kkk6/tecapro_internship/tree/main/DAY6#%EF%B8%8F-c%C3%B4ng-vi%E1%BB%87c-%C4%91%C3%A3-th%E1%BB%B1c-hi%E1%BB%87n)
 
 Tìm hiểu dữ liệu và nghiệp vụ của hệ thống **QTTG BHXH** thông qua file phân tích nghiệp vụ và DDL của các bảng.
 
@@ -17,8 +13,6 @@ Tìm hiểu dữ liệu và nghiệp vụ của hệ thống **QTTG BHXH** thôn
 
 ## 📚 Kiến thức rút ra
 
-[svg](https://github.com/Mnn2kkk6/tecapro_internship/tree/main/DAY6#-ki%E1%BA%BFn-th%E1%BB%A9c-r%C3%BAt-ra)
-
 Hiểu rõ vai trò và mối quan hệ giữa hai bảng:
 
 * **RAW_QTTG_BHXH:** lưu trạng thái tổng hợp của một người lao động tại từng thời điểm trích xuất dữ liệu.
@@ -28,8 +22,6 @@ Hiểu rõ vai trò và mối quan hệ giữa hai bảng:
 * Việc chọn phiên bản mới nhất giúp giữ lại dữ liệu cập nhật nhất và tránh tính trùng các giai đoạn detail khi xử lý các layer phía sau.
 
 ## ✅ Kết quả
-
-[svg](https://github.com/Mnn2kkk6/tecapro_internship/tree/main/DAY6#-k%E1%BA%BFt-qu%E1%BA%A3)
 
 Hoàn thành việc kiểm tra và hiểu cấu trúc dữ liệu đầu vào:
 
