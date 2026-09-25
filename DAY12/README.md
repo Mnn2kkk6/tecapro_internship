@@ -1,5 +1,9 @@
 # ⚡ BÁO CÁO NGÀY 12 — JOIN VÀ XỬ LÝ DỮ LIỆU GIAO DỊCH TRONG PYSPARK
 
+## 🔗 Link GitHub
+
+https://github.com/Mnn2kkk6/spark-transactions-pipeline
+
 ## 🛠️ Công việc đã thực hiện
 
 ### Bài 1 — Join và xử lý dữ liệu không mapping
