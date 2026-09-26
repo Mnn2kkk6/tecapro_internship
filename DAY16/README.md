@@ -1,5 +1,9 @@
 # ⚡ BÁO CÁO NGÀY 16 — BÀI TỔNG HỢP PYSPARK
 
+## 🔗 Link GitHub
+
+https://github.com/Mnn2kkk6/pyspark-lab
+
 ## 🛠️ Công việc đã thực hiện
 
 Thực hiện bài tổng hợp nhằm kết hợp các kiến thức PySpark đã học thành một quy trình xử lý dữ liệu hoàn chỉnh từ **Read → Clean → Validate → Deduplicate → Join → Transform → Aggregate → Write → Check**.
